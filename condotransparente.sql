@@ -33,4 +33,3 @@ CREATE TABLE `ocorrencias` (
   CONSTRAINT fk_ocorrencias_condominios FOREIGN KEY (id_condominio)
   REFERENCES condominios(id_condominio) ON DELETE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
