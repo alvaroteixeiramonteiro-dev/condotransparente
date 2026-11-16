@@ -1,0 +1,311 @@
+/* ============================================================
+   CondoTransparente - base stylesheet
+   ============================================================ */
+
+/* 1. Variables */
+:root {
+    --cor-principal: #1F5F8B;
+    --cor-principal-escura: #174A6C;
+    --cor-secundaria: #2A9D8F;
+    --fundo: #F4F6F8;
+    --superficie: #FFFFFF;
+    --texto: #1D2733;
+    --texto-suave: #5B6B7B;
+    --borda: #D5DCE3;
+    --rodape-fundo: #12364D;
+    --rodape-texto: #CFD9E2;
+
+    /* Added: feedback and danger colors (not in the first palette) */
+    --sucesso-fundo: #E3F4E8;
+    --sucesso-texto: #1B5E2F;
+    --sucesso-borda: #A9D8B8;
+    --erro-fundo: #FDEAEA;
+    --erro-texto: #8A1F1F;
+    --erro-borda: #F0B4B4;
+    --perigo: #B3261E;
+    --perigo-escuro: #8C1D17;
+    --topo-utilizador: #CFE3F1;
+    --secundario-hover: #E6EEF4;
+
+    --raio: 6px;
+    --fonte: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+/* 2. Base */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: var(--fonte);
+    line-height: 1.6;
+    color: var(--texto);
+    background: var(--fundo);
+}
+
+h1, h2 {
+    line-height: 1.25;
+}
+
+h1 {
+    margin: 0 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 3px solid var(--cor-secundaria);
+}
+
+a {
+    color: var(--cor-principal);
+}
+
+a:hover {
+    color: var(--cor-principal-escura);
+}
+
+/* 3. Header and navigation */
+.topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding: 0.9rem 1.5rem;
+    background: var(--cor-principal);
+}
+
+.topo a {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.topo a:hover {
+    text-decoration: underline;
+}
+
+.logo {
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.topo nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+}
+
+.utilizador {
+    color: var(--topo-utilizador);
+    font-size: 0.95rem;
+}
+
+/* 4. Main content */
+main {
+    flex: 1;
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 1.5rem;
+}
+
+.detalhe {
+    padding: 1.5rem;
+    background: var(--superficie);
+    border: 1px solid var(--borda);
+    border-radius: var(--raio);
+}
+
+.detalhe dt {
+    font-weight: 700;
+    color: var(--texto-suave);
+}
+
+.detalhe dd {
+    margin: 0 0 0.75rem;
+}
+
+/* 5. Flash messages and validation errors */
+.mensagem {
+    margin-bottom: 1rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid transparent;
+    border-radius: var(--raio);
+}
+
+.mensagem ul {
+    margin: 0.5rem 0 0;
+    padding-left: 1.25rem;
+}
+
+.mensagem.sucesso {
+    background: var(--sucesso-fundo);
+    color: var(--sucesso-texto);
+    border-color: var(--sucesso-borda);
+}
+
+.mensagem.erro {
+    background: var(--erro-fundo);
+    color: var(--erro-texto);
+    border-color: var(--erro-borda);
+}
+
+/* Filled by validacao.js; hidden until there are browser-side errors */
+#erros-js {
+    display: none;
+}
+
+/* 6. Buttons (links and form buttons share the same look) */
+.btn,
+button {
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    font: inherit;
+    font-weight: 600;
+    text-decoration: none;
+    color: #FFFFFF;
+    background: var(--cor-principal);
+    border: 1px solid var(--cor-principal);
+    border-radius: var(--raio);
+    cursor: pointer;
+}
+
+.btn:hover,
+button:hover {
+    color: #FFFFFF;
+    background: var(--cor-principal-escura);
+    border-color: var(--cor-principal-escura);
+}
+
+.btn.secundario {
+    color: var(--cor-principal);
+    background: transparent;
+    border-color: var(--cor-principal);
+}
+
+.btn.secundario:hover {
+    color: var(--cor-principal-escura);
+    background: var(--secundario-hover);
+}
+
+button.perigo,
+.perigo {
+    background: var(--perigo);
+    border-color: var(--perigo);
+}
+
+button.perigo:hover,
+.perigo:hover {
+    background: var(--perigo-escuro);
+    border-color: var(--perigo-escuro);
+}
+
+/* 7. Forms */
+.formulario {
+    max-width: 480px;
+    padding: 1.5rem;
+    background: var(--superficie);
+    border: 1px solid var(--borda);
+    border-radius: var(--raio);
+}
+
+.formulario label {
+    display: block;
+    margin: 1rem 0 0.3rem;
+    font-weight: 600;
+}
+
+.formulario label:first-child {
+    margin-top: 0;
+}
+
+.formulario input[type="text"],
+.formulario input[type="email"],
+.formulario input[type="password"],
+.formulario input[type="search"],
+.formulario select,
+.formulario textarea {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    font: inherit;
+    color: var(--texto);
+    background: var(--superficie);
+    border: 1px solid var(--borda);
+    border-radius: var(--raio);
+}
+
+.formulario textarea {
+    min-height: 8rem;
+    resize: vertical;
+}
+
+.formulario input:focus,
+.formulario select:focus,
+.formulario textarea:focus {
+    outline: 2px solid var(--cor-secundaria);
+    outline-offset: 1px;
+    border-color: var(--cor-secundaria);
+}
+
+/* Consent checkbox: box and text side by side */
+.formulario label.check {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-weight: 400;
+}
+
+.formulario label.check input {
+    margin-top: 0.35rem;
+}
+
+.formulario button {
+    margin-top: 1.25rem;
+}
+
+/* 8. Footer */
+.rodape {
+    padding: 1rem 1.5rem;
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--rodape-texto);
+    background: var(--rodape-fundo);
+}
+
+.rodape p {
+    margin: 0 0 0.25rem;
+}
+
+.rodape a {
+    color: var(--rodape-texto);
+}
+
+.rodape a:hover {
+    color: #FFFFFF;
+}
+
+/* 9. Small screens */
+@media (max-width: 600px) {
+    .topo {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0.9rem 1rem;
+    }
+
+    .topo nav {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    main {
+        padding: 1rem;
+    }
+
+    .formulario {
+        max-width: none;
+        padding: 1rem;
+    }
+}
