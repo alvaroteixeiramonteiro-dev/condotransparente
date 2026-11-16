@@ -1,0 +1,12 @@
+<%# Lista os erros de validação no servidor %>
+<% if (erros.length > 0) { %>
+    <div class="mensagem erro">
+        Corrija os seguintes erros:
+        <ul>
+            <% erros.forEach(function(erro) { %>
+                <li><%= erro %></li>
+            <% }); %>
+        </ul>
+    </div>
+<% } %>
+<ul id="erros-js" class="mensagem erro" style="display: none;"></ul>
