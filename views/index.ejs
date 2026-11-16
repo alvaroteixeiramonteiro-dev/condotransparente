@@ -1,0 +1,17 @@
+<%- include('partials/cabecalho') %>
+<h1>CondoTransparente</h1>
+<p>Registe e acompanhe as ocorrências nas partes comuns dos condomínios que administra: avarias, infiltrações, iluminação, portas e outras situações. Saiba sempre o que está pendente, em curso ou resolvido.</p>
+
+<% if (utilizador) { %>
+    <p>
+        <a href="/ocorrencias" class="btn">Ver as ocorrências</a>
+        <a href="/condominios" class="btn secundario">Ver os condomínios</a>
+    </p>
+<% } else { %>
+    <p>Para registar e consultar ocorrências, inicie sessão ou crie uma conta de administrador.</p>
+    <p>
+        <a href="/login" class="btn">Entrar</a>
+        <a href="/registo" class="btn secundario">Criar conta</a>
+    </p>
+<% } %>
+<%- include('partials/rodape') %>

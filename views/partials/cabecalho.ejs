@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title><%= titulo %> · CondoTransparente</title>
+        <link rel="stylesheet" href="/css/estilos.css">
+    </head>
+    <body>
+        <header class="topo">
+            <a href="/" class="logo">CondoTransparente</a>
+            <nav>
+                <% if (utilizador) { %>
+                    <a href="/condominios">Condomínios</a>
+                    <a href="/ocorrencias">Ocorrências</a>
+                    <a href="/conta">A minha conta</a>
+                    <span class="utilizador">Olá, <%= utilizador.nome %>!</span>
+                    <a href="/logout">Sair</a>
+                <% } else { %>
+                    <a href="/login">Entrar</a>
+                    <a href="/registo">Criar conta</a>
+                <% } %>
+            </nav>
+        </header>
+        <main>
+            <% if (msg) { %>
+                <div class="mensagem <%= msg.tipo %>"><%= msg.texto %></div>
+            <% } %>
