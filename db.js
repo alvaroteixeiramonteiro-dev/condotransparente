@@ -1,7 +1,6 @@
 // Database connection configuration
 // Credentials are loaded from the .env file using the dotenv package
 const mysql = require('mysql2/promise');
-require('dotenv').config();
 // Create a connection pool to the MySQL database
 // A connection pool allows for efficient management of multiple database connections
 const db = mysql.createPool({
