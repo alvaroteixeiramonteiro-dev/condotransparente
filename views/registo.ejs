@@ -1,0 +1,34 @@
+<%# Registration page. Rendered by GET /registo and by POST /registo when validation fails. %>
+<%# Variables from routes/auth.js: titulo (used by the header), erros (array), nome and email (kept after an error). %>
+<%- include('partials/cabecalho') %>
+<h1>Criar conta</h1>
+<p>Faça o seu registo para gerir os condomínios e as ocorrências.</p>
+ 
+<%# Server-side validation errors (empty list = nothing shown) %>
+<%- include('partials/erros') %>
+ 
+<%# method="post": the data goes in the request body, not in the URL.
+    action: the route that receives it (POST /registo in routes/auth.js).
+    id: used by validacao.js (chapter 6). novalidate: our own messages replace the browser's. %>
+<form action="/registo" method="post" id="form-principal" class="formulario" novalidate>
+    <%# The name attribute becomes req.body.nome. The value keeps what was typed after an error. %>
+    <label for="nome">Nome</label>
+    <input type="text" id="nome" name="nome" maxlength="100" required value="<%= nome %>">
+ 
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" maxlength="150" required value="<%= email %>">
+ 
+    <%# The password is never sent back to the page, so there is no value attribute here. %>
+    <label for="password">Password (mínimo 8 caracteres)</label>
+    <input type="password" id="password" name="password" required data-minimo="8">
+ 
+    <%# GDPR consent: the box only reaches req.body.consentimento when it is ticked. %>
+    <label class="check" for="consentimento">
+        <input type="checkbox" id="consentimento" name="consentimento" required>
+        <span>Li e aceito a <a href="/privacidade" target="_blank">política de privacidade</a>.</span>
+    </label>
+ 
+    <button type="submit">Criar conta</button>
+</form>
+<p>Já tem conta? <a href="/login">Entre aqui</a>.</p>
+<%- include('partials/rodape') %>

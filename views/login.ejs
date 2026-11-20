@@ -1,0 +1,21 @@
+<%# Login page. Rendered by GET /login and by POST /login when the credentials are wrong. %>
+<%# Variables from routes/auth.js: titulo (used by the header), erros (array) and email (kept after an error). %>
+<%- include('partials/cabecalho') %>
+<h1>Entrar</h1>
+ 
+<%# Server-side errors, such as "Email ou password errados." %>
+<%- include('partials/erros') %>
+ 
+<form action="/login" method="post" id="form-principal" class="formulario" novalidate>
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" maxlength="150" required value="<%= email %>">
+ 
+    <%# No data-minimo and no value here: the login must not reveal the password rules,
+        and the password is never sent back to the page. %>
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" required>
+ 
+    <button type="submit">Entrar</button>
+</form>
+<p>Ainda não tem conta? <a href="/registo">Crie uma aqui</a>.</p>
+<%- include('partials/rodape') %>
