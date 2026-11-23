@@ -41,6 +41,7 @@ app.get('/privacidade', (req, res) => {
 });
  
 app.use('/', require('./routes/auth')); // Registration, login and logout (routes/auth.js)
+app.use('/condominios', require('./routes/condominios')); // Condominios (routes/condominios)
 // The other routers (condominios, ocorrencias) are added here, one per commit,
 // as each routes/*.js file is created.
  

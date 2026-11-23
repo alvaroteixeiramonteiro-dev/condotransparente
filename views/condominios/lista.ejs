@@ -1,0 +1,25 @@
+<%- include('../partials/cabecalho') %>
+
+<h1>Condomínios</h1>
+
+<div class="barra">
+    <span><%= condominios.length %> condomínio(s) registado(s)</span>
+    <a href="/condominios/novo" class="btn"> + Novo condomínio</a>
+</div>
+
+<table class="tabela">
+    <tr>
+        <th>Nome</th>
+        <th>Morada</th>
+        <th>Ocorrências</th>
+    </tr>
+    <% condominios.forEach(condominio => { %>
+        <tr>
+        <td><%= condominio.nome %></td>
+        <td><%= condominio.morada %></td>
+        <td><%= condominio.total_ocorrencias %></td>
+        </tr>
+    <% }) %>
+</table>
+
+<%- include('../partials/rodape') %>
