@@ -2,9 +2,10 @@
 
 <h1>Condomínios</h1>
 
+<%# Bar with the total and the button to create a new condominium %>
 <div class="barra">
     <span><%= condominios.length %> condomínio(s) registado(s)</span>
-    <a href="/condominios/novo" class="btn"> + Novo condomínio</a>
+    <a href="/condominios/novo" class="btn">+ Novo condomínio</a>
 </div>
 
 <table class="tabela">
@@ -13,11 +14,12 @@
         <th>Morada</th>
         <th>Ocorrências</th>
     </tr>
+    <%# One row per condominium: everything between forEach and }) repeats %>
     <% condominios.forEach(condominio => { %>
         <tr>
-        <td><%= condominio.nome %></td>
-        <td><%= condominio.morada %></td>
-        <td><%= condominio.total_ocorrencias %></td>
+            <td><%= condominio.nome %></td>
+            <td><%= condominio.morada %></td>
+            <td><%= condominio.total_ocorrencias %></td>
         </tr>
     <% }) %>
 </table>
