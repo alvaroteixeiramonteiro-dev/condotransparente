@@ -309,3 +309,53 @@ button.perigo:hover,
         padding: 1rem;
     }
 }
+
+/* 9. Lists and tables */
+
+/* Bar above a list: count on the left, "New" button on the right */
+.barra {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+/* Simple table */
+.tabela {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--superficie);
+    border: 1px solid var(--borda);
+    border-radius: var(--raio);
+}
+
+.tabela th,
+.tabela td {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--borda);
+}
+
+.tabela th {
+    background: var(--secundario-hover);
+    color: var(--texto);
+}
+
+/* Edit link and delete form side by side */
+.acoes {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.acoes form {
+    margin: 0;
+}
+
+/* Message shown when a list is empty */
+.vazio {
+    color: var(--texto-suave);
+    font-style: italic;
+}
