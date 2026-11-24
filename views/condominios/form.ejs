@@ -1,0 +1,25 @@
+<%# Form to create a condominium. Rendered by GET /condominios/novo and by POST /condominios/novo when validation fails. %>
+<%# Variables from routes/condominios.js: titulo (page title), acao (where the form is sent), condominio (nome and morada) and erros (array). %>
+<%- include('../partials/cabecalho') %>
+<h1><%= titulo %></h1>
+
+<%# Server-side validation errors (empty list = nothing shown) %>
+<%- include('../partials/erros') %>
+
+<%# method="post": the data goes in the request body, not in the URL.
+    action: the route that receives it (POST /condominios/novo).
+    id: used by validacao.js (chapter 6). novalidate: our own messages replace the browser's. %>
+<form method="post" action="<%= acao %>" id="form-principal" class="formulario" novalidate>
+    <%# The name attribute becomes req.body.nome. The value keeps what was typed after an error.
+        maxlength matches the column size (120); data-minimo is the minimum length read by validacao.js.
+        The server (validarCondominio) enforces the same limits: this is only quick feedback. %>
+    <label for="nome">Nome</label>
+    <input type="text" id="nome" name="nome" maxlength="120" required data-minimo="3" value="<%= condominio.nome %>">
+
+    <%# Required: the address column is NOT NULL in the database. maxlength matches the column size (200). %>
+    <label for="morada">Morada</label>
+    <input type="text" id="morada" name="morada" maxlength="200" required data-minimo="5" value="<%= condominio.morada %>">
+
+    <button type="submit">Guardar</button>
+</form>
+<%- include('../partials/rodape') %>
