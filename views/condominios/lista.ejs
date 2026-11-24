@@ -1,3 +1,5 @@
+<%# List of the logged-in user's condominiums. Rendered by GET /condominios. %>
+<%# Variables from routes/condominios.js: titulo (page title) and condominios (array of rows). %>
 <%- include('../partials/cabecalho') %>
 
 <h1>Condomínios</h1>
@@ -13,6 +15,7 @@
         <th>Nome</th>
         <th>Morada</th>
         <th>Ocorrências</th>
+        <th></th> <%# Empty heading: this column holds the action links (edit; delete comes next) %>
     </tr>
     <%# One row per condominium: everything between forEach and }) repeats %>
     <% condominios.forEach(condominio => { %>
@@ -20,6 +23,13 @@
             <td><%= condominio.nome %></td>
             <td><%= condominio.morada %></td>
             <td><%= condominio.total_ocorrencias %></td>
+            <%# Actions column: the id in the address tells the server which condominium to edit.
+                The server also checks that it belongs to the logged-in user. %>
+            <td>
+                <div class="acoes">
+                    <a href="/condominios/<%= condominio.id_condominio %>/editar">Editar</a>
+                </div>
+            </td>
         </tr>
     <% }) %>
 </table>

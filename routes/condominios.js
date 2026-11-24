@@ -1,5 +1,5 @@
-// Condominiums router: lists and creates the condominiums of the logged-in user.
-// More routes (edit, delete) are added here, one commit each.
+// Condominiums router: lists, creates and edits the condominiums of the logged-in user.
+// More routes (delete) are added here, one commit each.
 const express = require('express');
 const db = require('../db'); // MySQL connection pool
 const exigirLogin = require('../middleware/auth'); // Access control middleware
@@ -87,6 +87,62 @@ router.post('/novo', async (req, res) => {
 
     // Post/Redirect/Get: redirecting avoids a duplicate if the page is refreshed
     req.session.msg = { tipo: 'sucesso', texto: 'Condomínio criado.' };
+    res.redirect('/condominios');
+});
+
+// GET /condominios/:id/editar - show the form filled with the condominium's data
+router.get('/:id/editar', async (req, res) => {
+    // AND id_utilizador = ? makes sure the condominium belongs to the logged-in user.
+    // Without it, anyone could open another user's condominium by changing the id in the address.
+    const [linhas] = await db.query(
+        'SELECT nome, morada FROM condominios WHERE id_condominio = ? AND id_utilizador = ?',
+        [req.params.id, req.session.utilizador.id]
+    );
+
+    // No row: it does not exist OR it belongs to someone else (same answer for both cases)
+    if (linhas.length === 0) {
+        req.session.msg = { tipo: 'erro', texto: 'Esse condomínio não existe.' };
+        return res.redirect('/condominios');
+    }
+
+    res.render('condominios/form', {
+        titulo: 'Editar condomínio',
+        acao: `/condominios/${req.params.id}/editar`, // the same form is used to create and to edit
+        condominio: linhas[0],
+        erros: [],
+    });
+});
+
+// POST /condominios/:id/editar - validate and save the changes
+router.post('/:id/editar', async (req, res) => {
+    const condominio = lerCondominio(req.body);
+    const erros = validarCondominio(condominio);
+
+    // Invalid data: show the form again, keeping what was typed
+    if (erros.length > 0) {
+        return res.render('condominios/form', {
+            titulo: 'Editar condomínio',
+            acao: `/condominios/${req.params.id}/editar`,
+            condominio,
+            erros,
+        });
+    }
+
+    // The values follow the order of the ? placeholders.
+    // AND id_utilizador = ? stops a user from changing another user's condominium.
+    const [resultado] = await db.query(
+        'UPDATE condominios SET nome = ?, morada = ? WHERE id_condominio = ? AND id_utilizador = ?',
+        [condominio.nome, condominio.morada, req.params.id, req.session.utilizador.id]
+    );
+
+    // No row matched: it does not exist or it is not the user's
+    if (resultado.affectedRows === 0) {
+        req.session.msg = { tipo: 'erro', texto: 'Esse condomínio não existe.' };
+        return res.redirect('/condominios');
+    }
+
+    // Post/Redirect/Get, as in the create route
+    req.session.msg = { tipo: 'sucesso', texto: 'Condomínio atualizado.' };
     res.redirect('/condominios');
 });
 
