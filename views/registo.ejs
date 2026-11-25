@@ -13,7 +13,7 @@
 <form action="/registo" method="post" id="form-principal" class="formulario" novalidate>
     <%# The name attribute becomes req.body.nome. The value keeps what was typed after an error. %>
     <label for="nome">Nome</label>
-    <input type="text" id="nome" name="nome" maxlength="100" required data-minimo="3" required value="<%= nome %>">
+    <input type="text" id="nome" name="nome" maxlength="100" required data-minimo="3" value="<%= nome %>">
  
     <label for="email">Email</label>
     <input type="email" id="email" name="email" maxlength="150" required value="<%= email %>">

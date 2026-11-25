@@ -13,9 +13,9 @@ Work in progress. Implemented so far:
 - [x] Registration, login and logout (hashed passwords, sessions)
 - [x] Access control: protected pages redirect visitors to the login
 - [x] Condominiums: list with occurrence count, create (with validation)
-- [x] Condominiums: create and edit and delete
+- [x] Condominiums: create, edit and delete
 - [ ] Occurrences: full CRUD, search/filter and detail page
-- [ ] Browser-side validation
+- [x] Browser-side validation
 - [ ] Account page and account deletion (GDPR)
 
 ## Tech stack
