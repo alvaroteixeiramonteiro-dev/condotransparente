@@ -69,6 +69,13 @@ Three tables linked by one-to-many relationships:
 
 ## Use of AI
 
-I used Claude (Anthropic) as a tutor while building this project: to explain the
-concepts, review my code and point out mistakes. I wrote the code myself, following
-the course materials (Stack B manual and the "Biblioteca" reference app)
+I used Claude (Anthropic) as a tutor and code reviewer while building this project.
+
+- How I worked: I followed the course materials (the Stack B manual and the
+  "Biblioteca" reference app) and wrote my own versions of the files. Claude explained
+  the concepts, pointed out mistakes in my code and answered my questions.
+- What Claude wrote: for some files, Claude supplied corrected or complete versions
+  (for example `routes/condominios.js`, the condominium views and `public/js/validacao.js`),
+  and it drafted this README. I reviewed, tested and committed all of it.
+- My responsibility: Made the decisions (data model, validation rules, security
+  measures).

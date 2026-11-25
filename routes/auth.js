@@ -23,8 +23,8 @@ router.post('/registo', async (req, res) => {
     const erros = []; // All the errors are collected and shown together
  
     // 1. Validate on the server (browser validation can be bypassed)
-    if (nome < 3 || nome.length > 100) {
-        erros.push('O nome é obrigatório e deve ter entre 3 a 100 caracteres.');
+    if (nome.length < 3 || nome.length > 100) {
+        erros.push('O nome é obrigatório e deve ter entre 3 e 100 caracteres.');
     }
  
     // Simple email format: something@something.something, with no spaces
