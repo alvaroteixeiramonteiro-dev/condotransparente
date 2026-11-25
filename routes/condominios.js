@@ -1,5 +1,5 @@
-// Condominiums router: lists, creates and edits the condominiums of the logged-in user.
-// More routes (delete) are added here, one commit each.
+// Condominiums router: lists, creates, edits and deletes the condominiums of the logged-in user.
+// The occurrences routes live in routes/ocorrencias.js.
 const express = require('express');
 const db = require('../db'); // MySQL connection pool
 const exigirLogin = require('../middleware/auth'); // Access control middleware
@@ -143,6 +143,32 @@ router.post('/:id/editar', async (req, res) => {
 
     // Post/Redirect/Get, as in the create route
     req.session.msg = { tipo: 'sucesso', texto: 'Condomínio atualizado.' };
+    res.redirect('/condominios');
+});
+
+// POST /condominios/:id/apagar - delete a condominium (POST, never GET: a link must not change data)
+router.post('/:id/apagar', async (req, res) => {
+    try {
+        // AND id_utilizador = ? stops a user from deleting another user's condominium.
+        // The value is the user's id (req.session.utilizador.id), not the whole session object.
+        const [resultado] = await db.query(
+            'DELETE FROM condominios WHERE id_condominio = ? AND id_utilizador = ?',
+            [req.params.id, req.session.utilizador.id]
+        );
+
+        // No row matched: it does not exist (any more) or it is not the user's
+        if (resultado.affectedRows === 0) {
+            req.session.msg = { tipo: 'erro', texto: 'Esse condomínio não existe.' };
+        } else {
+            req.session.msg = { tipo: 'sucesso', texto: 'Condomínio apagado.' };
+        }
+    } catch (err) {
+        // The foreign key of the occurrences has ON DELETE RESTRICT: the database refuses
+        // to delete a condominium that still has occurrences. Any other error is unexpected.
+        if (err.code !== 'ER_ROW_IS_REFERENCED_2') throw err;
+        req.session.msg = { tipo: 'erro', texto: 'Não é possível apagar este condomínio, porque tem ocorrências registadas.' };
+    }
+
     res.redirect('/condominios');
 });
 

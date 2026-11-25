@@ -15,7 +15,7 @@
         <th>Nome</th>
         <th>Morada</th>
         <th>Ocorrências</th>
-        <th></th> <%# Empty heading: this column holds the action links (edit; delete comes next) %>
+        <th></th> <%# Empty heading: this column holds the action buttons (edit and delete) %>
     </tr>
     <%# One row per condominium: everything between forEach and }) repeats %>
     <% condominios.forEach(condominio => { %>
@@ -23,11 +23,17 @@
             <td><%= condominio.nome %></td>
             <td><%= condominio.morada %></td>
             <td><%= condominio.total_ocorrencias %></td>
-            <%# Actions column: the id in the address tells the server which condominium to edit.
+            <%# Actions column: the id in the address tells the server which condominium to change.
                 The server also checks that it belongs to the logged-in user. %>
             <td>
                 <div class="acoes">
                     <a href="/condominios/<%= condominio.id_condominio %>/editar">Editar</a>
+                    <%# Delete is a POST form (not a link), because it changes data.
+                        onsubmit asks for confirmation: Cancel stops the form from being sent. %>
+                    <form method="post" action="/condominios/<%= condominio.id_condominio %>/apagar"
+                        onsubmit="return confirm('Apagar este condomínio?');">
+                        <button type="submit" class="perigo">Apagar</button>
+                    </form>
                 </div>
             </td>
         </tr>
