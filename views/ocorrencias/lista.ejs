@@ -1,0 +1,36 @@
+<%# List of the logged-in user's occurrences. Rendered by GET /ocorrencias. %>
+<%# Variables from routes/ocorrencias.js: titulo (page title) and ocorrencias (array of rows). %>
+<%- include('../partials/cabecalho') %>
+
+<h1>Ocorrências</h1>
+
+<%# Bar with the total and the button to create a new occurrence %>
+<div class="barra">
+    <span><%= ocorrencias.length %> ocorrência(s) registada(s)</span>
+    <a href="/ocorrencias/novo" class="btn">+ Nova ocorrência</a>
+</div>
+
+<%# The description is long text, so it is shown only on the detail page.
+    The actions column (detail, edit, delete) is added in the next steps. %>
+<table class="tabela">
+    <tr>
+        <th>Título</th>
+        <th>Condomínio</th>
+        <th>Prioridade</th>
+        <th>Estado</th>
+        <th>Data de registo</th>
+    </tr>
+    <%# One row per occurrence: everything between forEach and }) repeats %>
+    <% ocorrencias.forEach(ocorrencia => { %>
+        <tr>
+            <td><%= ocorrencia.titulo %></td>
+            <td><%= ocorrencia.condominio %></td>
+            <td><%= ocorrencia.prioridade %></td>
+            <td><%= ocorrencia.estado %></td>
+            <%# data_registo arrives as a Date object: format it as dd/mm/yyyy %>
+            <td><%= ocorrencia.data_registo.toLocaleDateString('pt-PT') %></td>
+        </tr>
+    <% }) %>
+</table>
+
+<%- include('../partials/rodape') %>

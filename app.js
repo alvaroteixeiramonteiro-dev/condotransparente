@@ -42,8 +42,8 @@ app.get('/privacidade', (req, res) => {
  
 app.use('/', require('./routes/auth')); // Registration, login and logout (routes/auth.js)
 app.use('/condominios', require('./routes/condominios')); // Condominiums list and CRUD (routes/condominios.js)
-// The other routers (condominios, ocorrencias) are added here, one per commit,
-// as each routes/*.js file is created.
+app.use('/ocorrencias', require('./routes/ocorrencias')); // Occurrences (routes/ocorrencias.js)
+// Any new router is added here, one per commit, as each routes/*.js file is created.
  
 // 4. No route matched: page not found
 app.use((req, res) => {

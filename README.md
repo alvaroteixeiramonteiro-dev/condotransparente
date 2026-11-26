@@ -14,6 +14,7 @@ Work in progress. Implemented so far:
 - [x] Access control: protected pages redirect visitors to the login
 - [x] Condominiums: list with occurrence count, create (with validation)
 - [x] Condominiums: create, edit and delete
+- [x] Occurrences: list
 - [ ] Occurrences: full CRUD, search/filter and detail page
 - [x] Browser-side validation
 - [ ] Account page and account deletion (GDPR)
